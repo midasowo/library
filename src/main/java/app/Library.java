@@ -14,6 +14,7 @@ public class Library {
         DataReader dataReader = new DataReader();
         books[0] = dataReader.readAndCreateBook();
         books[1] = dataReader.readAndCreateBook();
+        dataReader.close();
 
         System.out.print(appName);
         System.out.println("Książki dostępne w bibliotece:");
