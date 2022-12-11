@@ -26,6 +26,12 @@ public class DataReader {
         return new Book(title, author, releaseDate, pages, publisher, isbn);
     }
 
+    public int getInt() {
+        int number = sc.nextInt();
+        sc.nextLine();
+        return number;
+    }
+
     public void close() {
         sc.close();
     }
