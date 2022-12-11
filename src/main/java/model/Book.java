@@ -25,12 +25,6 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public void printInfo() {
-        String info = title + "; " + author + "; " + releaseDate + "; "
-                + pages + "; " + publisher + "; " + isbn;
-        System.out.println(info);
-    }
-
     public String getTitle() {
         return title;
     }
@@ -77,5 +71,14 @@ public class Book {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public void printInfo() {
+        String info = title + "; " + author + "; " + releaseDate + "; "
+                + pages + "; " + publisher;
+        if (isbn != null) {
+            info = info + "; " + isbn;
+        }
+        System.out.println(info);
     }
 }
