@@ -6,9 +6,9 @@ import model.Library;
 
 public class LibraryControl {
 
-    private final int EXIT = 0;
-    private final int ADD_BOOKS = 1;
-    private final int PRINT_BOOKS = 3;
+    private static final int EXIT = 0;
+    private static final int ADD_BOOK = 1;
+    private static final int PRINT_BOOKS = 3;
     private DataReader dataReader = new DataReader();
     private Library library = new Library();
 
@@ -19,7 +19,7 @@ public class LibraryControl {
             printOptions();
             option = dataReader.getInt();
             switch (option) {
-                case ADD_BOOKS:
+                case ADD_BOOK:
                     addBook();
                     break;
                 case PRINT_BOOKS:
@@ -52,7 +52,7 @@ public class LibraryControl {
     private void printOptions() {
         System.out.println("Wybierz opcję:");
         System.out.println(EXIT + " - wyjście z programu");
-        System.out.println(ADD_BOOKS + " - dodanie nowej książki");
+        System.out.println(ADD_BOOK + " - dodanie nowej książki");
         System.out.println(PRINT_BOOKS + " - wyświetl dostępne książki");
     }
 }
