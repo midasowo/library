@@ -13,7 +13,7 @@ import java.util.InputMismatchException;
 public class LibraryControl {
 
     private ConsolePrinter printer = new ConsolePrinter();
-    private DataReader dataReader = new DataReader();
+    private DataReader dataReader = new DataReader(printer);
     private Library library = new Library();
 
     public void controlLoop() {
@@ -67,8 +67,14 @@ public class LibraryControl {
     }
 
     private void addMagazine() {
-        Magazine magazine = dataReader.readAndCreateMagazine();
-        library.addMagazine(magazine);
+        try {
+            Magazine magazine = dataReader.readAndCreateMagazine();
+            library.addMagazine(magazine);
+        } catch (InputMismatchException e) {
+            printer.printLine("Nie udało sie utworzyć magazynu. Wprowadzono niepoprawne dane.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printer.printLine("Osiągnięto limit pojemności. Nie można dodać kolejnego magazynu.");
+        }
     }
 
     private void exit() {
@@ -82,8 +88,14 @@ public class LibraryControl {
     }
 
     private void addBook() {
-        Book book = dataReader.readAndCreateBook();
-        library.addBook(book);
+        try {
+            Book book = dataReader.readAndCreateBook();
+            library.addBook(book);
+        } catch (InputMismatchException e) {
+            printer.printLine("Nie udało sie utworzyć książki. Wprowadzono niepoprawne dane.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printer.printLine("Osiągnięto limit pojemności. Nie można dodać kolejnej książki.");
+        }
     }
 
     private void printOptions() {
