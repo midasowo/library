@@ -8,6 +8,7 @@ public class DataReader {
 
     private Scanner sc = new Scanner(System.in);
 
+
     public Book readAndCreateBook() {
         System.out.println("Tytuł: ");
         String title = sc.nextLine();
@@ -42,9 +43,11 @@ public class DataReader {
     }
 
     public int getInt() {
-        int number = sc.nextInt();
-        sc.nextLine();
-        return number;
+        try {
+            return sc.nextInt();
+        } finally {
+            sc.nextLine();
+        }
     }
 
     public void close() {
