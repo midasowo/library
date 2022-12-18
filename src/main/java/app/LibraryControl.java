@@ -1,8 +1,11 @@
 package app;
 
+import exception.DataExportException;
 import exception.NoSuchOptionException;
 import io.ConsolePrinter;
 import io.DataReader;
+import io.file.FileManager;
+import io.file.FileManagerBuilder;
 import model.Book;
 import model.Library;
 import model.Magazine;
@@ -14,9 +17,21 @@ public class LibraryControl {
 
     private ConsolePrinter printer = new ConsolePrinter();
     private DataReader dataReader = new DataReader(printer);
-    private Library library = new Library();
+    private FileManager fileManager;
+    private Library library;
 
-    public void controlLoop() {
+    LibraryControl() {
+        fileManager = new FileManagerBuilder(printer, dataReader).buld();
+        try {
+            library = fileManager.importDate();
+        } catch (DataExportException e) {
+            printer.printLine(e.getMessage());
+            printer.printLine("Zainicjowano nową bazę.");
+            library = new Library();
+        }
+    }
+
+    void controlLoop() {
         Option option;
 
         do {
@@ -78,6 +93,12 @@ public class LibraryControl {
     }
 
     private void exit() {
+        try {
+            fileManager.exportData(library);
+            printer.printLine("Eksport danych do pliku zakończony powodzeniem.");
+        } catch (DataExportException e) {
+            printer.printLine(e.getMessage());
+        }
         printer.printLine("Koniec programu.");
         dataReader.close();
     }
@@ -106,7 +127,7 @@ public class LibraryControl {
     }
 
     private enum Option {
-        EXIT (0, "wyjście z programu"),
+        EXIT(0, "wyjście z programu"),
         ADD_BOOK(1, "dodanie nowej książki"),
         ADD_MAGAZINE(2, "dodanie nowego magazynu"),
         PRINT_BOOKS(3, "wyświetl dostępne książki"),
