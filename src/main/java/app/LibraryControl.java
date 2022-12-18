@@ -1,6 +1,7 @@
 package app;
 
 import exception.DataExportException;
+import exception.DataImportException;
 import exception.NoSuchOptionException;
 import io.ConsolePrinter;
 import io.DataReader;
@@ -21,10 +22,11 @@ public class LibraryControl {
     private Library library;
 
     LibraryControl() {
-        fileManager = new FileManagerBuilder(printer, dataReader).buld();
+        fileManager = new FileManagerBuilder(printer, dataReader).build();
         try {
-            library = fileManager.importDate();
-        } catch (DataExportException e) {
+            library = fileManager.importData();
+            printer.printLine("Zaimportowano dane z pliku.");
+        } catch (DataImportException e) {
             printer.printLine(e.getMessage());
             printer.printLine("Zainicjowano nową bazę.");
             library = new Library();
@@ -70,7 +72,7 @@ public class LibraryControl {
             } catch (NoSuchOptionException e) {
                 printer.printLine(e.getMessage());
             } catch (InputMismatchException e) {
-                printer.printLine("Wprowadzono wartośc, która nie jest liczbą. Podaj ponownie.");
+                printer.printLine("Wprowadzono wartość, która nie jest liczbą. Podaj ponownie.");
             }
         }
         return option;
@@ -99,8 +101,8 @@ public class LibraryControl {
         } catch (DataExportException e) {
             printer.printLine(e.getMessage());
         }
-        printer.printLine("Koniec programu.");
         dataReader.close();
+        printer.printLine("Koniec programu.");
     }
 
     private void printBooks() {

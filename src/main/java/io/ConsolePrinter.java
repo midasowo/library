@@ -10,7 +10,7 @@ public class ConsolePrinter {
         int countBooks = 0;
         for (Publication publication : publications) {
             if (publication instanceof Book) {
-                System.out.println(publication);
+                printLine(publication.toString());
                 countBooks++;
             }
         }
@@ -23,7 +23,7 @@ public class ConsolePrinter {
         int countMagazines = 0;
         for (Publication publication : publications) {
             if (publication instanceof Magazine) {
-                System.out.println(publication);
+                printLine(publication.toString());
                 countMagazines++;
             }
         }

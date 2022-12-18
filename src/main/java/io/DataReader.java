@@ -58,8 +58,6 @@ public class DataReader {
         return sc.nextLine();
     }
 
-
-
     public void close() {
         sc.close();
     }

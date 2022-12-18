@@ -13,19 +13,19 @@ public class FileManagerBuilder {
         this.reader = reader;
     }
 
-    public FileManager buld() {
+    public FileManager build() {
         printer.printLine("Wybierz format danych:");
-        FileType fileType = getFileTyle();
+        FileType fileType = getFileType();
         switch (fileType) {
             case SERIAL:
                 return new SerializableFileManager();
             default:
-                throw new NoSuchFileTypeException("Nieobsługiwany tym danych.");
+                throw new NoSuchFileTypeException("Nieobsługiwany typ danych.");
         }
     }
 
 
-    private FileType getFileTyle() {
+    private FileType getFileType() {
         boolean typeOk = false;
         FileType result = null;
         do {

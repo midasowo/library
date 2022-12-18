@@ -3,6 +3,6 @@ package io.file;
 import model.Library;
 
 public interface FileManager {
-    Library importDate();
+    Library importData();
     void exportData(Library library);
 }
